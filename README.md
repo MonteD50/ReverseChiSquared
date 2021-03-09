@@ -1,6 +1,8 @@
 # ReverseChiSquared
 Data generation by Reversing the Chi Squared technique.
 
+Paper in the process of revision and submittion.
+
 Streamlit demo for generating data for your own datasets:
 Online demo coming soon. But for now to run this yourself:
 
