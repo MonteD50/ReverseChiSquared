@@ -1,6 +1,5 @@
 import pandas as pd  
 import numpy as np
-import random, time
 from scipy.stats import chi2, chisquare
 
 class InverseChi:
@@ -59,7 +58,7 @@ class InverseChi:
 
         """
         new_data = []
-        while len(new_data) != self.num_new_additions:
+        while len(new_data) != self.num_new_additions: # TODO: chance to run forever: Add timout feature
             rand = np.random.multinomial(self.num_samples, np.array(cat_column) / self.num_samples, size=1)[0]
             pvalue = self.chiTest(cat_column, rand).pvalue
             if pvalue > self.alpha:
@@ -224,36 +223,36 @@ class Main:
         final = ToDiscrete(new_cats, self.num_categories, dividing_array, dividing_threshold, len(self.df))
         created_data = final.convert()
 
-        wanted_df = df[self.columns]
+        wanted_df = self.df[self.columns]
 
         result = wanted_df.append(created_data)
         
         return result
 
-filename = # csv file
-df = pd.read_csv(filename)
-
-"""
-Use only a subset of df to create data, the rest will be used for prediction
-"""
-subset_df = df.sample(int(len(df)/2))
-
-ins = []
-for i in range(len(subset_df)):
-    ins.append(subset_df.iloc[i]['Unnamed: 0'])
-
-testing_df = df.loc[df['Unnamed: 0'].isin(ins) == False]
-
-num_categories = 100
-num_new_samples = 10 # Note: this will be multiplied by len(df) for the actual number of new cases.
-
-columns = [] # columns you want
-
-
-main = Main(subset_df, columns, num_new_samples, num_categories)
-result = main.run()
-
-print(result)
-print(result.describe().transpose())
-result.to_csv("data2.csv", index=False) # returns the new data + data used for creation
-testing_df.to_csv("subset_testing.csv") # returns the data to be used for testing (not included in data creation)
+#filename = # csv file
+#df = pd.read_csv(filename)
+#
+#"""
+#Use only a subset of df to create data, the rest will be used for prediction
+#"""
+#subset_df = df.sample(int(len(df)/2))
+#
+#ins = []
+#for i in range(len(subset_df)):
+#    ins.append(subset_df.iloc[i]['Unnamed: 0'])
+#
+#testing_df = df.loc[df['Unnamed: 0'].isin(ins) == False]
+#
+#num_categories = 100
+#num_new_samples = 10 # Note: this will be multiplied by len(df) for the actual number of new cases.
+#
+#columns = [] # columns you want
+#
+#
+#main = Main(subset_df, columns, num_new_samples, num_categories)
+#result = main.run()
+#
+#print(result)
+#print(result.describe().transpose())
+#result.to_csv("data2.csv", index=False) # returns the new data + data used for creation
+#testing_df.to_csv("subset_testing.csv") # returns the data to be used for testing (not included in data creation)
