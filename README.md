@@ -4,7 +4,9 @@ Data generation by Reversing the Chi Squared technique.
 Paper in the process of revision and submittion.
 
 Streamlit demo for generating data for your own datasets:
-Online demo coming soon. But for now to run this yourself:
+Online demo:
+https://share.streamlit.io/arm627/reversechisquared/main/app.py
+To run this yourself:
 
 1. Clone this repo
 2. pip install -r requirements.txt
